@@ -1,0 +1,7 @@
+<h1>id: <%= @place.id %> のメッセージ詳細ページ</h1>
+
+<p><%= @place.adress %></p>
+<p><%= @place.image_date %></p>
+<p></p><%= @place.content %></p>
+
+<%= link_to "Delete", @place, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
