@@ -1,5 +1,6 @@
 class PlacesController < ApplicationController
   before_action :require_user_logged_in
+  before_action :correct_user, only: [:destroy]
   
   def index
     @places = Place.all.page(params[:page])
@@ -37,5 +38,12 @@ class PlacesController < ApplicationController
   
   def place_params
     params.require(:place).permit(:adress, :image_date, :content)
+  end
+  
+  def correct_user
+    @place = current_user.places.find_by(id: params[:id])
+    unless @place
+      redirect_to root_url
+    end
   end
 end

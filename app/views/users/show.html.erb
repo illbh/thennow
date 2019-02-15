@@ -11,7 +11,7 @@
   </aside>
   <div class="col-xs-8">
     <ul class="nav nav-tabs nav-justified">
-      <li><a href="#">投稿一覧</a></li>
+      <li class="<%= 'active' if current_page?(user_path(@user)) %>"><%= link_to user_path(@user) do %>投稿一覧<span class="badge"><%= @count_places %></span><% end %></li>
       <li><a href="#">お気に入りの場所</a></li>
     </ul>
   </div>
