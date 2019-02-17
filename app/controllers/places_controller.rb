@@ -7,7 +7,9 @@ class PlacesController < ApplicationController
   end
   
   def show
-    @place = Place.find(params[:id])
+    @place = Place.includes(:user).find(params[:id])
+    @comments = @place.comments.includes(:user).all
+    @comment = @place.comments.build(user_id: current_user.id) if current_user
   end
   
   def new
@@ -18,11 +20,11 @@ class PlacesController < ApplicationController
     @place = current_user.places.build(place_params)
     
     if @place.save
-      flash[:success] = 'メッセージを投稿しました。'
+      flash[:success] = '投稿が完了しました'
       redirect_to places_path
     else
       @places = current_user.places.order('created_at DESC').page(params[:page])
-      flash.now[:danger] = 'メッセージの投稿に失敗しました。'
+      flash.now[:danger] = '投稿に失敗しました'
       render new_place_path
     end
   end

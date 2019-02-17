@@ -7,3 +7,20 @@
 <% if current_user == @place.user %>
   <%= link_to "Delete", @place, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
 <% end %>
+
+
+<% @comments.each do |comment| %>
+  <div>
+    <strong><%= comment.user.name %></strong>
+    <br />
+    <p><%= comment.image_date %></p>
+    <p><%= comment.content %></p>
+    <% if current_user == comment.user %>
+      <p><%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<h2>コメント投稿</h2>
+  <%= render 'comments/form' %>
+

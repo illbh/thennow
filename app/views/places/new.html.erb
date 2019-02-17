@@ -1,17 +1,19 @@
 <h1>新規作成ページ</h1>
 
-<%= form_for(@place) do |f| %>
-
-  <%= f.label :adress, '住所' %>
-  <%= f.text_field :adress %>
+  <%= form_for(@place) do |f| %>
   
-  <%= f.label :image_date, '撮影日時' %>
-  <%= f.date_field :image_date %>
+    <%= f.label :adress, '住所' %>
+    <%= f.text_field :adress %>
+    
+    <%= f.label :image_date, '撮影日時' %>
+    <%= f.date_field :image_date %>
+    
+    <%= f.label :content, '写真補足' %>
+    <%= f.text_field :content %>
   
-  <%= f.label :content, '写真補足' %>
-  <%= f.text_field :content %>
+    <%= f.submit '投稿' %>
+  <% end %>
 
-  <%= f.submit '投稿' %>
-<% end %>
-
-<%= link_to '一覧に戻る', places_path %>
+<div>
+  <%= link_to '一覧に戻る', places_path %>
+</div>

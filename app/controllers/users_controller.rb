@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:index, :show]
   
   def index
-    @users = User.all.page(params[:page])
+     @users = User.all.page(params[:page])
   end
 
   def show
@@ -11,7 +11,11 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    if logged_in?
+      redirect_to places_path
+    else
+      @user = User.new
+    end
   end
 
   def create
