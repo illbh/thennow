@@ -26,3 +26,9 @@ h2 {
   background: transparent;/*背景透明に*/
   border-left: solid 5px #7db4e6;/*左線*/
 }
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}

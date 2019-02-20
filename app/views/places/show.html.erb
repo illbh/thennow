@@ -1,6 +1,6 @@
 <h1 class="h1">id: <%= @place.id %> <%= @place.adress %>からの風景</h1>
 
-<div class="image">
+<div class="detail">
   <div><%= image_tag @place.image %></div>
   <p><%= @place.user.name %>さんの投稿</p>
   <p>撮影日：<%= @place.image_date %></p>
@@ -13,7 +13,8 @@
 
     <%#= link_to "新規コメント", new_comment_path({place_id: @place.id}) %>
 
-<div class="image">
+
+<div class="detail">
   <% @comments.each do |comment| %>
     <div><%= image_tag comment.image %></div>
     <p><%= comment.user.name %>さんの投稿</p>
