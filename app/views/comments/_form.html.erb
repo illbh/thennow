@@ -1,13 +1,26 @@
+<div class="col-md-6 col-md-3">
 <%= form_for(@comment) do |f| %>
-  
-  <%= f.label :image_date, '撮影日時' %>
-  <%= f.date_field :image_date %>
-  
-  <%= f.label :content, '写真補足' %>
-  <%= f.text_field :content %>
 
-  <%= f.hidden_field :place_id %>
-  <%= f.hidden_field :user_id %>
+  <div class="form-group">
+    <%= f.label :image, '写真' %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :image_date, '撮影日時' %>
+    <%= f.date_field :image_date, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :content, '写真についての補足情報など' %>
+    <%= f.text_field :content, class: 'form-control' %>
+  </div>
 
-  <%= f.submit '投稿' %>
+  <div class="form-group">
+    <%= f.hidden_field :place_id %>
+    <%= f.hidden_field :user_id %>
+  </div>
+
+  <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
 <% end %>
+</div>

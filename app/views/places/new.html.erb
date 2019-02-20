@@ -1,19 +1,31 @@
-<h1>新規作成ページ</h1>
+<h1>新しい場所の写真を投稿する</h1>
 
+<div class="col-md-6 clearfix">
   <%= form_for(@place) do |f| %>
   
-    <%= f.label :adress, '住所' %>
-    <%= f.text_field :adress %>
-    
-    <%= f.label :image_date, '撮影日時' %>
-    <%= f.date_field :image_date %>
-    
-    <%= f.label :content, '写真補足' %>
-    <%= f.text_field :content %>
-  
-    <%= f.submit '投稿' %>
-  <% end %>
+  <div class="form-group">
+    <%= f.label :image, '写真' %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
 
-<div>
-  <%= link_to '一覧に戻る', places_path %>
+  <div class="form-group">  
+    <%= f.label :adress, '住所' %>
+    <%= f.text_field :adress, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :image_date, '撮影日時' %>
+    <%= f.date_field :image_date, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">    
+    <%= f.label :content, '写真についての補足情報など' %>
+    <%= f.text_field :content, class: 'form-control' %>
+  </div>
+  
+  <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+  
+  <% end %>
 </div>
+
+<%= link_to '一覧に戻る', places_path %>

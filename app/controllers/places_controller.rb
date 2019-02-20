@@ -36,10 +36,15 @@ class PlacesController < ApplicationController
     redirect_to places_path
   end
   
+  def newcomment
+    @place = Place.find(params[:id])
+    @comment = Comment.new
+  end
+  
   private
   
   def place_params
-    params.require(:place).permit(:adress, :image_date, :content)
+    params.require(:place).permit(:image, :adress, :image_date, :content)
   end
   
   def correct_user

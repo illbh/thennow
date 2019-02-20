@@ -6,4 +6,6 @@ class Place < ApplicationRecord
   
   has_many :comments
   has_many :posts, through: :comments, source: :comment
+  
+  mount_uploader :image, ImageUploader
 end

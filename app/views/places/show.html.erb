@@ -1,26 +1,32 @@
-<h1>id: <%= @place.id %> のメッセージ詳細ページ</h1>
+<h1>id: <%= @place.id %> <%= @place.adress %>からの風景</h1>
 
-<p><%= @place.adress %></p>
-<p><%= @place.image_date %></p>
-<p><%= @place.content %></p>
+<div>
+  <div><%= image_tag @place.image %></div>
+  <p><%= @place.user.name %>さんの投稿</p>
+  <p>撮影日：<%= @place.image_date %></p>
+  <p>補足情報：<%= @place.content %></p>
+  
+  <% if current_user == @place.user %>
+    <%= link_to "Delete", @place, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+  <% end %>
+</div>
+    <%#= link_to "新規コメント", new_comment_path({place_id: @place.id}) %>
 
-<% if current_user == @place.user %>
-  <%= link_to "Delete", @place, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
-<% end %>
+<div>
+  <% @comments.each do |comment| %>
+    <div><%= image_tag comment.image %></div>
+    <p><%= comment.user.name %>さんの投稿</p>
+    <p>撮影日：<%= comment.image_date %></p>
+    <p>補足情報：<%= comment.content %></p>
 
-
-<% @comments.each do |comment| %>
-  <div>
-    <strong><%= comment.user.name %></strong>
-    <br />
-    <p><%= comment.image_date %></p>
-    <p><%= comment.content %></p>
     <% if current_user == comment.user %>
       <p><%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %></p>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
-<h2>コメント投稿</h2>
+<h2>同じ場所の写真を投稿</h2>
   <%= render 'comments/form' %>
+
+<%= link_to '一覧に戻る', places_path %>
 

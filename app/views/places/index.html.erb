@@ -1,10 +1,18 @@
+<h1>投稿された場所一覧</h1>
+
 <ul>
     <div>
       <% @places.each do |place| %>
-        <li><%= link_to place.id, place %> : <%= place.adress %></li>
+          <li>
+            <p><%= link_to place.id, place %> : <%= place.adress %></p>
+            <div>
+              <%= image_tag place.image %>
+            </div>
+          </li>
       <% end %>
     </div>
-    <div>
-       <%= link_to '新規投稿', new_place_path %>
-    </div>
 </ul>
+
+<div>
+   <%= link_to '新しい場所に写真を投稿する', new_place_path, class: 'btn btn-primary btn-block' %>
+</div>

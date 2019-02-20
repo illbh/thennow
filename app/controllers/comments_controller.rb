@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
   end
 
   def new
+    @place = Place.find(params[:place_id])
     @comment = Comment.new
   end
 
@@ -32,7 +33,7 @@ class CommentsController < ApplicationController
   private
   
   def comment_params
-    params.require(:comment).permit(:place_id, :image_date, :content)
+    params.require(:comment).permit(:image, :place_id, :image_date, :content)
   end
   
   def correct_user
