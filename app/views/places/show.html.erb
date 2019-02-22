@@ -1,24 +1,19 @@
 <h1 class="h1">id: <%= @place.id %> <%= @place.adress %>からの風景</h1>
 
-<div class="container">
-  <div class="row">
-    <ul>
-      <% @comments.each do |comment| %>
-        <li class="detail col-md-4 col-sm-6 col-xs-12">
-          <div><%= image_tag comment.image %></div>
-          <p><%= comment.user.name %>さんの投稿</p>
-          <p>撮影日：<%= comment.image_date %></p>
+  <ul class="row">
+    <% @comments.each do |comment| %>
+      <li class="detail col-md-4 col-sm-6 col-xs-12">
+        <div><%= image_tag comment.image %></div>
+        <p><%= comment.user.name %>さんの投稿</p>
+        <p>撮影日：<%= comment.image_date %></p>
+        <p>補足情報：<%= comment.content %></p>
           
-            <p>補足情報：<%= comment.content %></p>
-            
-            <% if current_user == @place.user %>
-              <%= link_to "Delete", @place, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
-            <% end %>
-        </li>        
-      <% end %>
-    </ul>
-  </div>
-</div>
+          <% if current_user == comment.user %>
+            <%= link_to "Delete", comment, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+          <% end %>
+      </li>        
+    <% end %>
+  </ul>
 
 <h2>同じ場所の写真を投稿</h2>
   <%= render 'comments/form' %>

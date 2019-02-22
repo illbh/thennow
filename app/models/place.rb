@@ -6,7 +6,7 @@ class Place < ApplicationRecord
   #validates :image_date,presence: true
   #validates :image, presence: true
   
-  has_many :comments
+  has_many :comments,  dependent: :destroy
   has_many :posts, through: :comments, source: :comment
   
   mount_uploader :image, ImageUploader
