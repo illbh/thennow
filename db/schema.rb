@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190221045902) do
+ActiveRecord::Schema.define(version: 20190222111319) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -27,11 +27,8 @@ ActiveRecord::Schema.define(version: 20190221045902) do
   create_table "places", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.string   "adress"
-    t.date     "image_date"
-    t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "image"
     t.index ["user_id"], name: "index_places_on_user_id", using: :btree
   end
 
