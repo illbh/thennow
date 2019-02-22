@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+
+    
+    <% place_done = 0 %>
+    <ul>
+      <% @comments.each do |comment| %>
+        <% if place_done == 0 && (@place.image_date < comment.image_date) %>
+          <div class="detail col-md-4">
+            <div><%= image_tag @place.image %></div>
+            <p><%= @place.user.name %>さんの投稿</p>
+            <p>撮影日：<%= @place.image_date %></p>
+            <p>補足情報：<%= @place.content %></p>
+            
+            <% if current_user == @place.user %>
+              <%= link_to "Delete", @place, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+            <% end %>
+            <% place_done = 1 %>
+          </div>        
+        
+        <% end %>
+      
+        <li class="detail col-md-4">
+          <div><%= image_tag comment.image %></div>
+          <p><%= comment.user.name %>さんの投稿</p>
+          <p>撮影日：<%= comment.image_date %></p>
+          
+            <p>補足情報：<%= comment.content %></p>
+      
+          <% if current_user == comment.user %>
+            <p><%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %></p>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

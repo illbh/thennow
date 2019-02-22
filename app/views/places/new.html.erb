@@ -3,26 +3,33 @@
 <div class="row">
   <div class="col-md-6">
     <%= form_for(@place) do |f| %>
-    
-    <div class="form-group">
-      <%= f.label :image, '写真' %>
-      <%= f.file_field :image, class: 'form-control' %>
-    </div>
   
     <div class="form-group">  
       <%= f.label :adress, '住所' %>
       <%= f.text_field :adress, class: 'form-control' %>
     </div>
-    
-    <div class="form-group">
-      <%= f.label :image_date, '撮影日時' %>
-      <%= f.date_field :image_date, class: 'form-control' %>
-    </div>
-  
-    <div class="form-group">    
-      <%= f.label :content, '写真についての補足情報など' %>
-      <%= f.text_field :content, class: 'form-control' %>
-    </div>
+
+       <%= f.fields_for :comments do |fc| %>
+          <div class="form-group">
+            <%= fc.label :image, '写真' %>
+            <%= fc.file_field :image, class: 'form-control' %>
+          </div>
+          
+          <div class="form-group">
+            <%= fc.label :image_date, '撮影日時' %>
+            <%= fc.date_field :image_date, class: 'form-control' %>
+          </div>
+        
+          <div class="form-group">    
+            <%= fc.label :content, '写真についての補足情報など' %>
+            <%= fc.text_field :content, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%#= fc.hidden_field :place_id, :value => @place.id %>
+            <%= fc.hidden_field :user_id, :value => current_user.id %>
+          </div>
+        <% end %>
     
     <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
     
@@ -31,3 +38,14 @@
 </div>
 
 <%= link_to '一覧に戻る', places_path %>
+
+
+<% if @place.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @place.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

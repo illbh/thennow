@@ -32,3 +32,8 @@ h2 {
   display: block;
   clear: both;
 }
+
+li {
+  list-style: none;
+}
+}

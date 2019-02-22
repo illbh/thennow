@@ -1,0 +1,21 @@
+<div id="place" class="clearfix">
+  <% @places.each do |place| %>
+    <ul>
+      <li>
+        <p class="top_image"><%= link_to place.id, place %> : <%= place.adress %></p>
+        <div class="place_image"><%= image_tag place.image %></div>
+
+        <% comments = place.comments.all
+          comments.each do |comment| %>
+          <% if comment.present? %>              
+            <ul>
+              <li class="comment_image"ß>
+                <%= image_tag comment.image %>
+              </li>
+            </ul>
+          <% end %>
+        <% end %>
+      </li>
+    </ul>
+  <% end %>
+</div>

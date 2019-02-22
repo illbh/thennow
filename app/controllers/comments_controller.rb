@@ -6,20 +6,20 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
-  def new
-    @place = Place.find(params[:place_id])
-    @comment = Comment.new
-  end
+  #def new
+   # @place = Place.find(params[:place_id])
+    #@comment = Comment.new
+  #send
 
   def create
     @comment = current_user.comments.build(comment_params)
     if @comment.save
-      flash[:success] = '投稿が完了しました'
+      flash[:success] = 'コメント投稿が完了しました'
       redirect_back(fallback_location: root_path)
     else
       @comments = current_user.comments.order('created_at DESC').page(params[:page])
-      flash.now[:danger] = '投稿に失敗しました。'
-      render new_comment_path
+      flash[:danger] = 'コメント投稿に失敗しました。'
+      redirect_back(fallback_location: root_path)
     end
   end
 

@@ -8,12 +8,13 @@ class PlacesController < ApplicationController
   
   def show
     @place = Place.includes(:user).find(params[:id])
-    @comments = @place.comments.includes(:user).all
+    @comments = @place.comments.includes(:user).all.order("image_date ASC")
     @comment = @place.comments.build(user_id: current_user.id) if current_user
   end
   
   def new
     @place = Place.new
+    @place.comments.build(user_id: current_user.id) if current_user
   end
   
   def create
@@ -36,15 +37,18 @@ class PlacesController < ApplicationController
     redirect_to places_path
   end
   
-  def newcomment
-    @place = Place.find(params[:id])
-    @comment = Comment.new
-  end
+  #def newcomment
+   # @place = Place.find(params[:id])
+   # @comment = Comment.new
+  #end
   
   private
   
   def place_params
-    params.require(:place).permit(:image, :adress, :image_date, :content)
+    params.require(:place).permit(
+      :adress,
+      comments_attributes: [:user_id, :image, :image_date, :content]
+    )
   end
   
   def correct_user
