@@ -6,10 +6,10 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
-  #def new
-   # @place = Place.find(params[:place_id])
-    #@comment = Comment.new
-  #send
+  def new
+   @place = Place.find(params[:place_id])
+   @comment = Comment.new
+  end
 
   def create
     @comment = current_user.comments.build(comment_params)

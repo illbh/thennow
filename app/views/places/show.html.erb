@@ -1,5 +1,11 @@
 <h1 class="h1">id: <%= @place.id %> <%= @place.adress %>からの風景</h1>
 
+<div class="right">
+  <% if current_user == @place.user %>
+    <%= link_to "PlaceDelete", @place, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+  <% end %>
+</div>
+
   <ul class="row">
     <% @comments.each do |comment| %>
       <li class="detail col-md-4 col-sm-6 col-xs-12">
@@ -11,17 +17,15 @@
           <% if current_user == comment.user %>
             <%= link_to "Delete", comment, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
           <% end %>
-          
-          <% if current_user == @place.user %>
-            <%= link_to "PlaceDelete", @place, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
-          <% end %>
       </li>        
     <% end %>
   </ul>
 
 <h2>同じ場所の写真を投稿</h2>
-  <%= render 'comments/form' %>
+  <%= render 'comments/form', comment: @comment %>
 
   <%#= link_to "新規コメント", new_comment_path({place_id: @place.id}) %>
 
 <%= link_to '一覧に戻る', places_path %>
+
+
