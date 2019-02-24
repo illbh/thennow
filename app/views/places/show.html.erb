@@ -12,6 +12,7 @@
         <div><%= image_tag comment.image %></div>
         <p><%= comment.user.name %>さんの投稿</p>
         <p>撮影日：<%= comment.image_date %></p>
+        
         <% if comment.content.present? %>
           <p>補足情報：<%= comment.content %></p>
         <% end %>

@@ -6,7 +6,5 @@ class Place < ApplicationRecord
   has_many :comments,  dependent: :destroy
   has_many :posts, through: :comments, source: :comment
   
-  mount_uploader :image, ImageUploader
-  
   accepts_nested_attributes_for :comments, allow_destroy: true
 end
